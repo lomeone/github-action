@@ -11,6 +11,12 @@ inputs:
     description: 'The JDK version to use for the test'
     required: false
     default: '21'
+  codecov-token:
+    description: 'The codecov token'
+    required: true
+  coveralls-token:
+    description: 'The coveralls token'
+    required: true
 
 runs;
   using: 'composite'
@@ -31,3 +37,16 @@ runs;
         ./gradlew clean
         ./gradlew test
         ./gradlew jacocoAllReport
+
+    - name: Run coverage measurement (use codecov)
+      uses: codecov/codecov-action@v4
+      with:
+        token: ${{ inputs.codecov-token }}
+        files: ./build/reports/jacoco/jacocoAllReport/jacocoAllReport.xml
+        fail_ci_if_error: true
+
+    - name: Set up coveralls repo token in environment
+      run: echo "COVERALLS_REPO_TOKEN=${{ inputs.coveralls-token }}" >> $GITHUB_ENV
+
+    - name: Run coverage measurement (use coveralls)
+      run: ./gradlew coveralls
