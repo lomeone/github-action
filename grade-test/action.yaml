@@ -18,7 +18,7 @@ inputs:
     description: 'The coveralls token'
     required: true
 
-runs;
+runs:
   using: 'composite'
   steps:
     - name: Checkout code
@@ -30,7 +30,7 @@ runs;
         uses: actions/setup-java@v4
         with:
           distribution: 'corretto'
-          java-version: '21'
+          java-version: '${{ inputs.jdk-version }}'
 
     - name: Run test & Make coverage report
       run: |
