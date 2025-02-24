@@ -2,6 +2,15 @@ name: Test
 
 on:
   workflow_call:
+    inputs:
+      aws-region:
+        description: 'The AWS region'
+        required: true
+        type: string
+      aws-role-arn:
+        description: 'The AWS role ARN'
+        required: true
+        type: string
 
 jobs:
   test:
@@ -16,8 +25,8 @@ jobs:
       - name: Configure AWS Credential
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-region: ${{ secrets.AWS_REGION }}
-          role-to-assume: arn:aws:iam::396428372646:role/FNReservationServiceRole-lomeone-eks
+          aws-region: ${{ inputs.AWS_REGION }}
+          role-to-assume: ${{ inputs.AWS_ROLE_ARN }}
 
       - name: Gradle test
         uses: lomeone/github-action/gradle/test@main
