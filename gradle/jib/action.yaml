@@ -30,6 +30,7 @@ runs:
         java-version: '${{ inputs.jdk-version }}'
 
     - name: Run jib
+      shell: bash
       run: |
         ./gradlew clean
         ./gradlew ${{ inputs.module-name && format('{0}:', inputs.module-name) || '' }}jib
