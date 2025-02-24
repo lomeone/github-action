@@ -25,8 +25,8 @@ jobs:
       - name: Configure AWS Credential
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-region: ${{ inputs.AWS_REGION }}
-          role-to-assume: ${{ inputs.AWS_ROLE_ARN }}
+          aws-region: ${{ inputs.aws-region }}
+          role-to-assume: ${{ inputs.aws-role-arn }}
 
       - name: Gradle test
         uses: lomeone/github-action/gradle/test@main
