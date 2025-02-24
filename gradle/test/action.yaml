@@ -1,0 +1,52 @@
+name: 'Run gradle test'
+
+description: 'Run gradle test for the specified module'
+
+inputs:
+  ref:
+    description: 'The ref to checkout'
+    required: false
+    default: ''
+  jdk-version:
+    description: 'The JDK version to use for the test'
+    required: false
+    default: '21'
+  codecov-token:
+    description: 'The codecov token'
+    required: true
+  coveralls-token:
+    description: 'The coveralls token'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ inputs.ref }}
+    
+    - name: Set up jdk
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'corretto'
+        java-version: '${{ inputs.jdk-version }}'
+
+    - name: Run test & Make coverage report
+      run: |
+        ./gradlew clean
+        ./gradlew test
+        ./gradlew jacocoAllReport
+
+    - name: Run coverage measurement (use codecov)
+      uses: codecov/codecov-action@v4
+      with:
+        token: ${{ inputs.codecov-token }}
+        files: ./build/reports/jacoco/jacocoAllReport/jacocoAllReport.xml
+        fail_ci_if_error: true
+
+    - name: Set up coveralls repo token in environment
+      run: echo "COVERALLS_REPO_TOKEN=${{ inputs.coveralls-token }}" >> $GITHUB_ENV
+
+    - name: Run coverage measurement (use coveralls)
+      run: ./gradlew coveralls

@@ -1,0 +1,35 @@
+name: 'Run gradle jib'
+
+description: 'Run gradle jib for the specified module'
+
+inputs:
+  ref:
+    description: 'The ref to checkout'
+    required: false
+    default: ''
+  jdk-version:
+    description: 'The JDK version to use for the test'
+    required: false
+    default: '21'
+  module-name:
+    description: 'The module to build with jib'
+    required: false
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ inputs.ref }}
+    
+    - name: Set up jdk
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'corretto'
+        java-version: '${{ inputs.jdk-version }}'
+
+    - name: Run jib
+      run: |
+        ./gradlew clean
+        ./gradlew ${{ inputs.module-name && format('{0}:', inputs.module-name) || '' }}jib

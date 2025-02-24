@@ -1,0 +1,30 @@
+name: Module JIB Build
+
+on:
+  workflow_call:
+    inputs:
+      module-name:
+        description: 'The module to build with jib'
+        required: true
+        type: string
+
+jobs:
+  jib:
+    name: Gradle Jib
+    runs-on: lomeone-arc-runner-set
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+
+    steps:
+      - name: Configure AWS Credential
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Gradle jib
+        uses: lomeone/github-action/gradle/jib@main
+        with:
+          module-name: ${{ inputs.module-name }}
