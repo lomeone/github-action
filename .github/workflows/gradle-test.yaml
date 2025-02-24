@@ -16,7 +16,7 @@ jobs:
       - name: Configure AWS Credential
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-region: ap-northeast-2
+          aws-region: ${{ secrets.AWS_REGION }}
           role-to-assume: arn:aws:iam::396428372646:role/FNReservationServiceRole-lomeone-eks
 
       - name: Gradle test
