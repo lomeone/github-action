@@ -33,6 +33,7 @@ runs:
         java-version: '${{ inputs.jdk-version }}'
 
     - name: Run test & Make coverage report
+      shell: bash
       run: |
         ./gradlew clean
         ./gradlew test
@@ -46,7 +47,9 @@ runs:
         fail_ci_if_error: true
 
     - name: Set up coveralls repo token in environment
+      shell: bash
       run: echo "COVERALLS_REPO_TOKEN=${{ inputs.coveralls-token }}" >> $GITHUB_ENV
 
     - name: Run coverage measurement (use coveralls)
+      shell: bash
       run: ./gradlew coveralls
