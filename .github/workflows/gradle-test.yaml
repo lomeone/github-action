@@ -1,0 +1,26 @@
+name: Test
+
+on:
+  workflow_call:
+
+jobs:
+  test:
+    name: Gradle Test
+    runs-on: lomeone-arc-runner-set
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    
+    steps:
+      - name: Configure AWS Credential
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Gradle test
+        uses: lomeone/github-action/gradle/test@main
+        with:
+          codecov-token: ${{ secrets.CODECOV_TOKEN }}
+          coveralls-token: ${{ secrets.COVERALLS_TOKEN }}

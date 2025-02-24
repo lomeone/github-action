@@ -27,10 +27,10 @@ runs:
         ref: ${{ inputs.ref }}
     
     - name: Set up jdk
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'corretto'
-          java-version: '${{ inputs.jdk-version }}'
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'corretto'
+        java-version: '${{ inputs.jdk-version }}'
 
     - name: Run test & Make coverage report
       run: |
