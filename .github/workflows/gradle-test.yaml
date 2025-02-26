@@ -24,6 +24,3 @@ jobs:
         with:
           codecov-token: ${{ secrets.CODECOV_TOKEN }}
           coveralls-token: ${{ secrets.COVERALLS_TOKEN }}
-        env:
-          GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
