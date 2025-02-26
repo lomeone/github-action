@@ -31,6 +31,11 @@ runs:
       with:
         distribution: 'corretto'
         java-version: '${{ inputs.jdk-version }}'
+    
+    - name: Check env
+      run: |
+        echo "GITHUB_ACTOR: $GITHUB_ACTOR"
+        echo "GITHUB_TOKEN: $GITHUB_TOKEN"
 
     - name: Run test & Make coverage report
       shell: bash
