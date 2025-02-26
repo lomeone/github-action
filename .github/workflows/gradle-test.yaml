@@ -20,7 +20,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Gradle test
-        uses: lomeone/github-action/gradle/test@feature/gradle-test
+        uses: lomeone/github-action/gradle/test@main
         with:
           codecov-token: ${{ secrets.CODECOV_TOKEN }}
           coveralls-token: ${{ secrets.COVERALLS_TOKEN }}
