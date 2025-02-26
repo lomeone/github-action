@@ -33,6 +33,7 @@ runs:
         java-version: '${{ inputs.jdk-version }}'
     
     - name: Check env
+      shell: bash
       run: |
         echo "GITHUB_ACTOR: $GITHUB_ACTOR"
         echo "GITHUB_TOKEN: $GITHUB_TOKEN"
