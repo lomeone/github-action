@@ -37,13 +37,12 @@ runs:
       run: |
         ./gradlew clean
         ./gradlew test
-        ./gradlew jacocoAllReport
 
     - name: Run coverage measurement (use codecov)
       uses: codecov/codecov-action@v4
       with:
         token: ${{ inputs.codecov-token }}
-        files: ./build/reports/jacoco/jacocoAllReport/jacocoAllReport.xml
+        files: ./build/reports/kover/report.xml
         fail_ci_if_error: true
 
     - name: Set up coveralls repo token in environment
