@@ -1,6 +1,6 @@
-name: 'Run gradle test'
+name: 'Run gradle Kotlin test'
 
-description: 'Run gradle test for the specified module'
+description: 'Run gradle kotlin test for the specified module'
 
 inputs:
   ref:
