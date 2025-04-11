@@ -20,11 +20,11 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Gradle test
-        uses: lomeone/github-action/gradle/kotlin-test@main
+        uses: lomeone/github-action/gradle/kotlin-test@hotfix/v0.0.10
         with:
           codecov-token: ${{ secrets.CODECOV_TOKEN }}
           coveralls-token: ${{ secrets.COVERALLS_TOKEN }}
+          sonar-token: ${{ secrets.SONAR_TOKEN }}
         env:
           GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
