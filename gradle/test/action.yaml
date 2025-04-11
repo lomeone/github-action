@@ -17,7 +17,7 @@ inputs:
   coveralls-token:
     description: 'The coveralls token'
     required: true
-  sornar-token:
+  sonar-token:
     description: 'The sonar token'
     required: true
 
@@ -61,4 +61,4 @@ runs:
       run: |
         ./gradlew sonar
       env:
-        SONAR_TOKEN: ${{ inputs.SONAR_TOKEN }}
+        SONAR_TOKEN: ${{ inputs.sonar-token }}

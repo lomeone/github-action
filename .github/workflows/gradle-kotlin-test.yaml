@@ -20,7 +20,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Gradle test
-        uses: lomeone/github-action/gradle/kotlin-test@hotfix/v0.0.10
+        uses: lomeone/github-action/gradle/kotlin-test@main
         with:
           codecov-token: ${{ secrets.CODECOV_TOKEN }}
           coveralls-token: ${{ secrets.COVERALLS_TOKEN }}
