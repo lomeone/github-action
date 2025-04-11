@@ -52,3 +52,10 @@ runs:
     - name: Run coverage measurement (use coveralls)
       shell: bash
       run: ./gradlew coveralls
+    
+    - name: Run sonar analysis
+      shell: bash
+      run: |
+        ./gradlew sonar
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
