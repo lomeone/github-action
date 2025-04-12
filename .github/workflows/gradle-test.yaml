@@ -2,11 +2,17 @@ name: Test
 
 on:
   workflow_call:
+    inputs:
+      runner:
+        description: 'The runner to use for the test job'
+        required: false
+        type: string
+        default: 'ubuntu-latest'
 
 jobs:
   test:
     name: Gradle Test
-    runs-on: lomeone-arc-runner-set
+    runs-on: ${{ inputs.runner }}
     permissions:
       contents: read
       packages: read
