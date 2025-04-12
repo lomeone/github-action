@@ -3,6 +3,11 @@ name: Module JIB Build
 on:
   workflow_call:
     inputs:
+      runner:
+        description: 'The runner to use for the test job'
+        required: false
+        type: string
+        default: 'ubuntu-latest'
       module-name:
         description: 'The module to build with jib'
         required: true
@@ -11,7 +16,7 @@ on:
 jobs:
   jib:
     name: Gradle Jib
-    runs-on: lomeone-arc-runner-set
+    runs-on: ${{ inputs.runner }}
     permissions:
       contents: read
       packages: read
