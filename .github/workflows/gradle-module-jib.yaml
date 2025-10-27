@@ -7,7 +7,7 @@ on:
         description: 'The runner to use for the test job'
         required: false
         type: string
-        default: 'ubuntu-latest'
+        default: 'ubuntu-24.04-arm'
       module-name:
         description: 'The module to build with jib'
         required: true
