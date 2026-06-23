@@ -25,12 +25,12 @@ runs:
   using: 'composite'
   steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         ref: ${{ inputs.ref }}
     
     - name: Set up jdk
-      uses: actions/setup-java@v4
+      uses: actions/setup-java@v5
       with:
         distribution: 'corretto'
         java-version: '${{ inputs.jdk-version }}'
@@ -42,7 +42,7 @@ runs:
         ./gradlew test
 
     - name: Run coverage measurement (use codecov)
-      uses: codecov/codecov-action@v5
+      uses: codecov/codecov-action@v7
       with:
         token: ${{ inputs.codecov-token }}
         files: ./build/reports/kover/report.xml
